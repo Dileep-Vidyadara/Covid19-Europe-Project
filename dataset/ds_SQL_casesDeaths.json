@@ -1,0 +1,56 @@
+{
+	"name": "ds_SQL_casesDeaths",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_SQL_databse",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SQL database"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "country",
+				"type": "varchar"
+			},
+			{
+				"name": "country_code_2_digit",
+				"type": "varchar"
+			},
+			{
+				"name": "country_code_3_digit",
+				"type": "varchar"
+			},
+			{
+				"name": "population",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "confirmed_cases_count",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "deaths_count",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "date",
+				"type": "date"
+			},
+			{
+				"name": "source",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "covid_reporting_schema",
+			"table": "casesDeaths"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

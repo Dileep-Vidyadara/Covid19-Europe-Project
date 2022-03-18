@@ -1,0 +1,75 @@
+{
+	"name": "pl_hospital_SQL",
+	"properties": {
+		"activities": [
+			{
+				"name": "hospital data tfrom to sql",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "transformed/hospital_daily/"
+					},
+					{
+						"name": "Destination",
+						"value": "covid_reporting_schema.HospitalAdmissionsDaily"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_transformed_hospital_daily_data",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_SQL_hospital",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "zLoad_to_SQL_Database"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-03-16T22:12:25Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

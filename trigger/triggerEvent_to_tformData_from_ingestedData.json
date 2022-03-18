@@ -1,0 +1,42 @@
+{
+	"name": "triggerEvent_to_tformData_from_ingestedData",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_tform_casesDeath_data",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "pl_tform_hospital_data",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "pl_tform_population_data",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "pl_tform_testingData",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/ingested/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/94e08f64-0ecb-40eb-85ae-47a66a90b0fb/resourceGroups/covid19-resource-group/providers/Microsoft.Storage/storageAccounts/datalakecovid19data",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

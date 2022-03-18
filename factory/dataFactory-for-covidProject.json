@@ -1,0 +1,9 @@
+{
+	"name": "dataFactory-for-covidProject",
+	"location": "australiaeast",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "19bd9a5e-3061-40f8-bd33-b46c600c80ac",
+		"tenantId": "e72f8dd2-b3ff-43bc-a928-4a0afb932439"
+	}
+}

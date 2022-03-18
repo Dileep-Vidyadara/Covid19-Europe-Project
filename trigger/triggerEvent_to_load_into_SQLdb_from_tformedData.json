@@ -1,0 +1,36 @@
+{
+	"name": "triggerEvent_to_load_into_SQLdb_from_tformedData",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_casesDeath_SQL",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "pl_hospital_SQL",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "pl_testing_data_SQL",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/transformed/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/94e08f64-0ecb-40eb-85ae-47a66a90b0fb/resourceGroups/covid19-resource-group/providers/Microsoft.Storage/storageAccounts/datalakecovid19data",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

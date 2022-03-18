@@ -1,0 +1,31 @@
+{
+	"name": "triggerSchedule_to_extact_and_ingest_data",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_github_ingestion",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "pl_ingest_population_data",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2022-03-18T10:30:00",
+				"endTime": "2022-03-19T08:00:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}

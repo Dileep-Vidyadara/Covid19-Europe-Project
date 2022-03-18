@@ -1,0 +1,37 @@
+{
+	"name": "pl_tform_population_data",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow from Raw to Processed",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow_population_data",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "Transforming"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-03-16T22:12:25Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

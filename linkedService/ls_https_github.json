@@ -1,0 +1,13 @@
+{
+	"name": "ls_https_github",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://raw.githubusercontent.com/Dileep-Vidyadara/Covid19-Europe-Project/main/main-csv-data-files/",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

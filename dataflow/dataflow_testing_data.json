@@ -1,0 +1,152 @@
+{
+	"name": "dataflow_testing_data",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_ingested_testing_data",
+						"type": "DatasetReference"
+					},
+					"name": "sourcetestingData"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_country_lookup",
+						"type": "DatasetReference"
+					},
+					"name": "sourceCountry"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_calendar_lookup",
+						"type": "DatasetReference"
+					},
+					"name": "sourceCalendar"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_transformed_testing_data",
+						"type": "DatasetReference"
+					},
+					"name": "sinkTesting"
+				}
+			],
+			"transformations": [
+				{
+					"name": "lookupcountry"
+				},
+				{
+					"name": "selectOnlyReqFields"
+				},
+				{
+					"name": "derivedColumn"
+				},
+				{
+					"name": "aggregateYearWeekCol"
+				},
+				{
+					"name": "joinAggCalendarData"
+				},
+				{
+					"name": "selectReqCols"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          country as string,",
+				"          country_code as string,",
+				"          year_week as string,",
+				"          new_cases as integer,",
+				"          tests_done as integer,",
+				"          population as integer,",
+				"          testing_rate as double,",
+				"          positivity_rate as double,",
+				"          testing_data_source as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourcetestingData",
+				"source(output(",
+				"          country as string,",
+				"          country_code_2_digit as string,",
+				"          country_code_3_digit as string,",
+				"          continent as string,",
+				"          population as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourceCountry",
+				"source(output(",
+				"          date_key as string,",
+				"          date as string,",
+				"          year as string,",
+				"          month as string,",
+				"          day as string,",
+				"          day_name as string,",
+				"          day_of_year as string,",
+				"          week_of_month as string,",
+				"          week_of_year as string,",
+				"          month_name as string,",
+				"          year_month as string,",
+				"          year_week as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourceCalendar",
+				"sourcetestingData, sourceCountry lookup(sourcetestingData@country == sourceCountry@country,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookupcountry",
+				"lookupcountry select(mapColumn(",
+				"          country = sourcetestingData@country,",
+				"          country_code_2_digit,",
+				"          country_code_3_digit,",
+				"          year_week,",
+				"          new_cases,",
+				"          tests_done,",
+				"          population = sourcetestingData@population,",
+				"          testing_rate,",
+				"          positivity_rate,",
+				"          testing_data_source,",
+				"          country = sourceCountry@country",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectOnlyReqFields",
+				"sourceCalendar derive(year_w_week = year + \"-W\" + lpad(week_of_year, 2, '0')) ~> derivedColumn",
+				"derivedColumn aggregate(groupBy(year_w_week),",
+				"     starting_weekDate = min(date),",
+				"          endnig_weekDate = max(date)) ~> aggregateYearWeekCol",
+				"selectOnlyReqFields, aggregateYearWeekCol join(year_week == year_w_week,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> joinAggCalendarData",
+				"joinAggCalendarData select(mapColumn(",
+				"          country,",
+				"          country_code_2_digit,",
+				"          country_code_3_digit,",
+				"          year_week,",
+				"          starting_weekDate,",
+				"          endnig_weekDate,",
+				"          new_cases,",
+				"          tests_done,",
+				"          population,",
+				"          testing_rate,",
+				"          positivity_rate,",
+				"          testing_data_source",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectReqCols",
+				"selectReqCols sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkTesting"
+			]
+		}
+	}
+}

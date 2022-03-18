@@ -1,0 +1,60 @@
+{
+	"name": "ds_SQL_hospital",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_SQL_databse",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SQL database"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "country",
+				"type": "varchar"
+			},
+			{
+				"name": "country_code_2_digit",
+				"type": "varchar"
+			},
+			{
+				"name": "country_code_3_digit",
+				"type": "varchar"
+			},
+			{
+				"name": "population",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "date",
+				"type": "date"
+			},
+			{
+				"name": "month_name",
+				"type": "varchar"
+			},
+			{
+				"name": "daily_hospital_occupancy_count",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "daily_ICU_occupancy_count",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "source",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "covid_reporting_schema",
+			"table": "HospitalAdmissionsDaily"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

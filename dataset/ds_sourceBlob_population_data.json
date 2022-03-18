@@ -1,0 +1,81 @@
+{
+	"name": "ds_sourceBlob_population_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "EuroStat_Population_By_Age"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "population_by_age.tsv.gz",
+				"container": "population"
+			},
+			"columnDelimiter": "\t",
+			"compressionCodec": "gzip",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "indic_de,geo\\time",
+				"type": "String"
+			},
+			{
+				"name": "2008 ",
+				"type": "String"
+			},
+			{
+				"name": "2009 ",
+				"type": "String"
+			},
+			{
+				"name": "2010 ",
+				"type": "String"
+			},
+			{
+				"name": "2011 ",
+				"type": "String"
+			},
+			{
+				"name": "2012 ",
+				"type": "String"
+			},
+			{
+				"name": "2013 ",
+				"type": "String"
+			},
+			{
+				"name": "2014 ",
+				"type": "String"
+			},
+			{
+				"name": "2015 ",
+				"type": "String"
+			},
+			{
+				"name": "2016 ",
+				"type": "String"
+			},
+			{
+				"name": "2017 ",
+				"type": "String"
+			},
+			{
+				"name": "2018 ",
+				"type": "String"
+			},
+			{
+				"name": "2019 ",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

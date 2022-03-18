@@ -1,0 +1,76 @@
+{
+	"name": "ds_SQL_testing",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_SQL_databse",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SQL database"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "country",
+				"type": "varchar"
+			},
+			{
+				"name": "country_code_2_digit",
+				"type": "char"
+			},
+			{
+				"name": "country_code_3_digit",
+				"type": "char"
+			},
+			{
+				"name": "year_week",
+				"type": "varchar"
+			},
+			{
+				"name": "starting_weekDate",
+				"type": "date"
+			},
+			{
+				"name": "endnig_weekDate",
+				"type": "date"
+			},
+			{
+				"name": "new_cases",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "tests_done",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "population",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "testing_rate",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 12
+			},
+			{
+				"name": "positivity_rate",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 14
+			},
+			{
+				"name": "testing_data_source",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "covid_reporting_schema",
+			"table": "testing_data"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
