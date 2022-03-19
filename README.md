@@ -65,9 +65,6 @@ File Name | Description of File
 
 
 
-
-This project has been taken inspiration from one of the course in Udemy: https://www.udemy.com/course/learn-azure-data-factory-from-scratch/
-
 ![](./Slides_and_Screenshots(Media)/giphy.gif)
 
 
