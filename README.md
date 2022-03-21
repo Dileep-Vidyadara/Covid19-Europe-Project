@@ -63,6 +63,8 @@ File Name | Description of File
 * I have also used **Schedule Triggers** at the time of Ingesting the data into the ADLS storage from different storage and also used **Event Triggers** which triggers when the data reaches into the ADLS storage.
 * I basically categorized the data into 3 types. i.e ***Brozne --> Silver --> Gold*** which basically means when the data moves from bronze to gold, the quality and the value of the data improves.
 
+* This project has been taken inspiration from one of the course in Udemy: https://www.udemy.com/course/learn-azure-data-factory-from-scratch/
+
 
 
 ![](./Slides_and_Screenshots(Media)/giphy.gif)
