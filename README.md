@@ -23,7 +23,7 @@ File Name | Description of File
 * I have uploaded the *population_by_age.tsv.gz (zipped_file)* into the Azure Blob Storage manually. After that I initialized the Azure Data Factory and created the **Linked Service** which connects to the Blob Storage and created **DataSet** points for the particular file. Along with that I created the **Pipeline** which has a **Copy Activity** that helps to Copy the Population Data from Blob storage to the **ADLS gen2**
 
 
-![](./Slides_and_Screenshots(Media)/population_data_blob_ingestion.png)
+![](./Slides_and_Screenshots(Media)/population_data_blob_ingestions.png)
 
 
 ### Step 2: 
